@@ -7,6 +7,7 @@ import requests
 import tempfile
 
 import cnn
+import svm
 
 app = FastAPI()
 
@@ -25,8 +26,12 @@ async def root():
 @app.post("/svm-classify")
 async def svm_classify(file: UploadFile = File(...)):
     contents = await file.read()
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".jpeg") as tmp:
+        tmp.write(contents)
+        tmp_path = tmp.name
 
-    result = "Blight"
+    result = svm.predict_image(tmp_path)
+
     return JSONResponse(content={"result": result})
 
 @app.post("/cnn-classify")
