@@ -1,12 +1,12 @@
-<script>
-// @ts-nocheck
+<script lang="ts">
 
-    // ...existing code...
     import { onMount } from 'svelte';
     let message = "";
     let imageUrl = "";
-    let fileInput;
-    let modelType = "cnn"; // default selection
+    let fileInput: any;
+    let modelType = "cnn"; 
+    
+    const HOST = "http://localhost:8000"
 
     function handleFileChange(event) {
         const file = event.target.files[0];
@@ -25,19 +25,22 @@
         formData.append('file', file);
 
         const endpoint = modelType === "cnn"
-            ? "http://localhost:8000/cnn-classify"
-            : "http://localhost:8000/svm-classify";
+            ? `${HOST}/cnn-classify`
+            : `${HOST}/svm-classify`;
 
         const res = await fetch(endpoint, {
             method: "POST",
             body: formData
         });
+
         const data = await res.json();
         message = data.result;
     }
 
     onMount(async () => {
-        
+        const res = await fetch(`${HOST}/`, { method: "GET" });
+        const data = await res.json();
+        console.log(data.message)
     });
 </script>
 
@@ -50,7 +53,6 @@
       <h1 class="text-2xl font-bold text-green-800 mb-4">Corn Leaf Disease Classification</h1>
       <p class="text-gray-700 mb-6">Upload an image of a corn leaf to classify its disease.</p>
 
-      <!-- Model selection -->
       <div class="mb-4 flex gap-4 justify-center">
         <label>
           <input type="radio" name="model" value="cnn" bind:group={modelType} checked />
