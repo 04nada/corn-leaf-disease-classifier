@@ -11,7 +11,6 @@ import pickle
 IMAGE_SIZE: tuple[int, int] = (64, 64)
 IMAGE_SUFFIXES: set[str] = {'.jpeg', '.jpg', '.png'}
 
-
 def load_image_from_path(image_path: Path) -> list[int]:
     image: Image.Image = Image.open(image_path).convert('RGB').resize(IMAGE_SIZE)
     image = ImageEnhance.Color(image).enhance(2.0)
