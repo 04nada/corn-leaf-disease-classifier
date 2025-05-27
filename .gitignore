@@ -2,8 +2,6 @@ data/*/
 typings/
 /*/checkpoints/*
 
-*.pkl
-
 # --- template
 
 # Byte-compiled / optimized / DLL files
