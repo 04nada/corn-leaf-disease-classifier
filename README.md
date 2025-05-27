@@ -12,7 +12,8 @@ The image classifications consist of:
 - Common Rust
 - Gray Leaf Spot
 
-The commands listed below assume a Windows installation, but the 
+The commands listed below assume a Windows installation.
+The dataset was provided for use in the project.
 
 ## Setup
 
@@ -38,6 +39,7 @@ The Python notebook for running the CNN may be found in the `/cnn` directory of 
 
 The Python notebook for running the SVM may be found in the `/svm` directory of the project.
 - `/svm/svm.ipynb` for the SVM proper
+- `/svm/svm_demo.ipynb` for the SVM demo (but use the web app)
 
 ## Web Application
 
